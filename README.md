@@ -15,8 +15,6 @@ dengan HTML5 semantik dan CSS modern. Dikerjakan sebagai Tugas Mandiri Minggu 02
 
 ## Tangkapan Layar
 
-![Tampilan desktop halaman portofolio](assets/screenshot-desktop.png)
-![Tampilan mobile halaman portofolio](assets/screenshot-mobile.png)
 
 > Ganti kedua berkas gambar di atas dengan tangkapan layar halaman live milikmu.
 
@@ -29,10 +27,9 @@ ppw-2026-week2-12S24047/
 ├── README.md
 └── assets/
     ├── logo.svg
-    ├── favicon.svg
     ├── foto-profil.svg
-    ├── proyek-andalitrack.svg
-    ├── proyek-partyup.svg
+    ├── proyek-andalitrack.jpg
+    ├── proyek-partyup.jpg
     └── proyek-temantumbuh.svg
 ```
 
@@ -91,8 +88,5 @@ git branch -M main
 git push -u origin main
 ```
 
-Aktifkan lewat **Settings → Pages → Branch: main → Save**, lalu tunggu URL live muncul.
-
----
 
 Institut Teknologi Del · Sitoluama, Laguboti, Toba Samosir
