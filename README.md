@@ -83,7 +83,7 @@ GitHub Pages.
 git init
 git add .
 git commit -m "feat: complete week 2 html5 and modern css assignment"
-git remote add origin https://github.com/[username]/ppw-2026-week2-12S24047.git
+git remote add origin https://github.com/DavinaHutabarat/ppw-2026-week2-12S24047.git
 git branch -M main
 git push -u origin main
 ```
