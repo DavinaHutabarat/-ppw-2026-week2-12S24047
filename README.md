@@ -11,7 +11,7 @@ dengan HTML5 semantik dan CSS modern. Dikerjakan sebagai Tugas Mandiri Minggu 02
 | NIM | 12S24047 |
 | Program Studi | S1 Sistem Informasi, Fakultas Informatika dan Teknik Elektro |
 | Dosen Pengampu | Chandro Pardede, S.Kom., M.Sc. |
-| Live Demo | (https://github.com/DavinaHutabarat/-ppw-2026-week2-12S24047/deployments/github-pages) |
+| Live Demo | (https://davinahutabarat.github.io/-ppw-2026-week2-12S24047/) |
 
 ## Tangkapan Layar
 
