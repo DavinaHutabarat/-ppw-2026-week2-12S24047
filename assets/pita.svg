@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB6C1"/>
+      <stop offset="100%" stop-color="#DE5D83"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#FFF0F4"/>
+  <path d="M32 30 C20 18 10 24 12 34 C13 41 24 37 32 32 Z" fill="url(#pinkGrad)"/>
+  <path d="M32 30 C44 18 54 24 52 34 C51 41 40 37 32 32 Z" fill="url(#pinkGrad)"/>
+  <path d="M30 33 L20 48 L26 49 L32 36 Z" fill="#DE5D83"/>
+  <path d="M34 33 L44 48 L38 49 L32 36 Z" fill="#DE5D83"/>
+  <circle cx="32" cy="31" r="5" fill="#B83256"/>
+  <circle cx="32" cy="31" r="3" fill="#FFCCD5"/>
+</svg>
