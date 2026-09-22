@@ -177,8 +177,9 @@ textarea:focus-visible {
   font-size: 1.25rem;
   vertical-align: middle;
 }
-.bow-accent {
-  font-size: 1.4rem;
+.sparkle-accent {
+  color: var(--cherry-rose);
+  font-size: 1.2rem;
   vertical-align: middle;
 }
 
@@ -215,14 +216,6 @@ textarea:focus-visible {
 }
 .brand:hover {
   transform: scale(1.02);
-}
-.brand-bow {
-  font-size: 1.6rem;
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-.brand:hover .brand-bow {
-  transform: rotate(-10deg) scale(1.15);
 }
 
 .brand-text {
@@ -319,22 +312,6 @@ textarea:focus-visible {
 .hero-avatar-wrap {
   position: relative;
   display: inline-block;
-}
-
-.avatar-ribbon {
-  position: absolute;
-  top: -18px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2.3rem;
-  z-index: 3;
-  filter: drop-shadow(0 4px 8px rgba(222, 93, 131, 0.25));
-  animation: softFloat 3s ease-in-out infinite alternate;
-}
-
-@keyframes softFloat {
-  0% { transform: translateX(-50%) translateY(0); }
-  100% { transform: translateX(-50%) translateY(-6px); }
 }
 
 .hero-figure img {
@@ -480,7 +457,7 @@ textarea:focus-visible {
 }
 
 /* =========================================================
-   7. GALERI KARTU PORTOFOLIO (COQUETTE CARDS)
+   7. GALERI KARTU PORTOFOLIO
    ========================================================= */
 .galeri {
   display: grid;
@@ -521,7 +498,7 @@ textarea:focus-visible {
   transform: scale(1.05);
 }
 
-.kartu-badge-ribbon {
+.kartu-badge {
   position: absolute;
   top: 12px;
   right: 12px;
@@ -822,11 +799,6 @@ textarea:focus-visible {
   box-shadow: var(--bayangan);
 }
 
-.aside-bow {
-  font-size: 2rem;
-  line-height: 1;
-  margin-bottom: 6px;
-}
 .samping h2 {
   font-size: 1.35rem;
   margin-bottom: 14px;
@@ -933,7 +905,6 @@ textarea:focus-visible {
   }
   .hero-figure { order: -1; }
   .hero-figure img { width: 190px; height: 190px; }
-  .avatar-ribbon { font-size: 1.8rem; top: -14px; }
   .galeri { grid-template-columns: 1fr; }
   .header-inner { justify-content: center; text-align: center; }
   .site-nav ul { justify-content: center; }
