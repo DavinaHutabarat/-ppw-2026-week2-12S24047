@@ -1,0 +1,920 @@
+/* ==========================================================================
+   TUGAS PRAKTIKUM MINGGU 03: PEMROGRAMAN DAN PENGUJIAN WEB (12S3101)
+   MODERNISASI & REFACTORING PERSONAL PORTFOLIO DENGAN BOOTSTRAP 5 & ADVANCED CSS
+   Pengembang: Davina Olivia Yosefanny Hutabarat (NIM: 12S24047)
+   Institut Teknologi Del
+   ========================================================================== */
+
+/* ==========================================================================
+   1. CSS CUSTOM PROPERTIES (:root)
+   Standardisasi tema warna (Coquette / Ballet-core Aesthetic), jarak & tipografi
+   (Memenuhi syarat spesifikasi: minimal 6 variabel CSS pada :root)
+   ========================================================================== */
+:root {
+  /* Palet Warna Primer & Aksen */
+  --primary-brand:    #DE5D83; /* Cherry Rose */
+  --primary-hover:    #B83256; /* Deep Rose Hover */
+  --primary-subtle:   #FFF0F5; /* Soft Rose Wash */
+  --accent-blush:     #FFB6C1; /* Baby Pink */
+  --accent-dusty:     #DCAE96; /* Warm Dusty Rose */
+  --accent-deep:      #7D1B36; /* Deep Wine / Maroon */
+
+  /* Latar Belakang & Permukaan */
+  --surface-bg:       #FFFFFF; /* Pure White Card / Container */
+  --bg-page:          #FFFDFD; /* Warm Soft White Page */
+  --bg-alt:           #FFF0F4; /* Light Blush Alternate Section */
+  --border-subtle:    #F2D2D9; /* Soft Pink Border */
+  --border-muted:     #FCE3E8; /* Ultra-light Divider */
+
+  /* Tipografi & Warna Teks (WCAG 2.2 AA Compliant) */
+  --text-main:        #2E282A; /* Dark Charcoal Plum */
+  --text-muted:       #6B5B60; /* Soft Charcoal Plum */
+  --text-light:       #FFFFFF;
+  --font-title:       "Playfair Display", Georgia, serif;
+  --font-script:      "Great Vibes", cursive;
+  --font-body:        "Quicksand", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Geometri & Radius */
+  --card-radius:      18px;
+  --radius-sm:        10px;
+  --radius-pill:      999px;
+
+  /* Sistem Bayangan (Elevations) */
+  --shadow-lift:      0 12px 28px -6px rgba(222, 93, 131, 0.18), 0 4px 12px -2px rgba(255, 182, 193, 0.22);
+  --shadow-card:      0 8px 20px -4px rgba(222, 93, 131, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  --shadow-button:    0 6px 18px -3px rgba(222, 93, 131, 0.35);
+}
+
+/* ==========================================================================
+   2. DASAR & TIPOGRAFI
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-main);
+  background-color: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Selektor Relasional :is() untuk penataan judul yang ringkas */
+:is(h1, h2, h3, h4, h5) {
+  font-family: var(--font-title);
+  font-weight: 700;
+  color: var(--accent-deep);
+  line-height: 1.25;
+}
+
+/* Aksesibilitas: Keyboard Focus State */
+:is(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid var(--primary-brand);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Tautan Skip-Link untuk Pembaca Layar */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--accent-deep);
+  color: var(--text-light);
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  z-index: 1050;
+  transition: top 0.2s ease;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+/* Aksen Tipografi Khas */
+.section-script-kicker {
+  font-family: var(--font-script);
+  font-size: 2.1rem;
+  color: var(--primary-brand);
+  display: block;
+  line-height: 1;
+  font-weight: 400;
+  margin-bottom: 2px;
+}
+
+.heart-accent,
+.sparkle-accent,
+.bow-accent {
+  color: var(--primary-brand);
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform 0.25s ease;
+}
+
+.section-intro:hover .heart-accent,
+.section-intro:hover .sparkle-accent {
+  transform: scale(1.2) rotate(6deg);
+}
+
+/* ==========================================================================
+   3. HEADER & RESPONSIVE NAVBAR (BOOTSTRAP 5 OVERRIDES)
+   ========================================================================== */
+.custom-navbar {
+  background-color: rgba(255, 253, 253, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Brand Identity */
+.brand-title {
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  letter-spacing: -0.01em;
+}
+.brand-subtitle {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-dusty);
+  letter-spacing: 0.02em;
+}
+
+/* Custom Hamburger Toggler */
+.custom-toggler {
+  border: 1.5px solid var(--border-subtle);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-bg);
+  transition: all 0.2s ease;
+}
+.custom-toggler:hover {
+  background-color: var(--bg-alt);
+  border-color: var(--primary-brand);
+}
+.custom-toggler:focus {
+  box-shadow: 0 0 0 3px rgba(222, 93, 131, 0.25);
+}
+
+/* Nav Links & Pseudo-classes :hover & :not() */
+.custom-navbar .navbar-nav > .nav-item > .nav-link {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  transition: all 0.25s ease;
+}
+
+.custom-navbar .navbar-nav > .nav-item > .nav-link:hover {
+  color: var(--primary-brand);
+  background-color: var(--bg-alt);
+  transform: translateY(-1px);
+}
+
+.custom-navbar .navbar-nav > .nav-item > .nav-link.active {
+  color: var(--accent-deep);
+  background-color: var(--primary-subtle);
+  font-weight: 700;
+}
+
+/* Selektor :not() pada navigasi */
+.custom-navbar .navbar-nav > .nav-item > .nav-link:not(.active):hover {
+  box-shadow: 0 2px 8px rgba(222, 93, 131, 0.1);
+}
+
+/* ==========================================================================
+   4. HERO SECTION
+   ========================================================================== */
+.hero-section {
+  padding-block: clamp(48px, 7vw, 84px);
+  background: radial-gradient(circle at 85% 25%, rgba(255, 182, 193, 0.3) 0%, rgba(255, 253, 253, 0) 65%),
+              radial-gradient(circle at 15% 85%, rgba(220, 174, 150, 0.25) 0%, rgba(255, 253, 253, 0) 60%);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.hero-kicker {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--accent-dusty);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hero-headline {
+  font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+  letter-spacing: -0.02em;
+}
+
+.hero-lede {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.hero-avatar-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-avatar-img {
+  width: 260px;
+  height: 260px;
+  border-radius: 28px;
+  border: 4px solid var(--surface-bg);
+  outline: 2px solid var(--border-subtle);
+  box-shadow: var(--shadow-lift);
+  object-fit: cover;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hero-avatar-wrapper:hover .hero-avatar-img {
+  transform: scale(1.025) rotate(-0.5deg);
+  box-shadow: 0 16px 36px -6px rgba(222, 93, 131, 0.28);
+}
+
+.hero-avatar-caption {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--accent-dusty);
+}
+
+/* ==========================================================================
+   5. TOMBOL KUSTOM (COQUETTE PILL)
+   ========================================================================== */
+.btn-primary-custom {
+  background: linear-gradient(135deg, var(--primary-brand) 0%, #FF8DA1 100%);
+  color: var(--text-light);
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  padding: 11px 26px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  box-shadow: var(--shadow-button);
+  transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-primary-custom:hover {
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary-brand) 100%);
+  color: var(--text-light);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 24px -4px rgba(222, 93, 131, 0.45);
+}
+
+.btn-outline-custom {
+  background-color: var(--surface-bg);
+  color: var(--accent-deep);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 11px 26px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  box-shadow: 0 4px 12px rgba(222, 93, 131, 0.08);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-outline-custom:hover {
+  border-color: var(--primary-brand);
+  color: var(--primary-brand);
+  background-color: var(--bg-alt);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(222, 93, 131, 0.16);
+}
+
+/* ==========================================================================
+   6. BAGIAN UMUM & TENTANG SAYA
+   ========================================================================== */
+.section-padding {
+  padding-block: clamp(52px, 7vw, 84px);
+}
+
+.bg-alt-section {
+  background-color: var(--bg-alt);
+  border-block: 1px solid var(--border-subtle);
+}
+
+/* Daftar Keahlian */
+.skills-list {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skills-list > li {
+  background-color: var(--surface-bg);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 7px 18px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--accent-deep);
+  box-shadow: 0 2px 8px rgba(222, 93, 131, 0.06);
+  transition: all 0.22s ease;
+}
+
+.skills-list > li:hover {
+  background-color: var(--bg-alt);
+  border-color: var(--primary-brand);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(222, 93, 131, 0.15);
+}
+
+/* Daftar Alur Pengerjaan (Adjacent Sibling & Pseudo-classes) */
+.workflow-list {
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+}
+
+.workflow-list > li {
+  margin-bottom: 12px;
+  padding-left: 6px;
+}
+
+.workflow-list > li::marker {
+  color: var(--primary-brand);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   7. HANDS-ON LAB 1 INTEGRASI: METRIC CARDS (DENGAN PSEUDO-ELEMENT ::before)
+   ========================================================================== */
+.metric-card-box {
+  position: relative;
+  background: var(--surface-bg);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  padding: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  height: 100%;
+}
+
+/* Pseudo-element ::before untuk garis aksen atas */
+.metric-card-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: var(--primary-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.metric-card-box:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lift);
+}
+
+.metric-card-box:hover::before {
+  transform: scaleX(1);
+}
+
+.metric-icon-wrap {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background-color: var(--primary-subtle);
+  color: var(--primary-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.metric-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-card-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.metric-card-value {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--accent-deep);
+}
+
+/* ==========================================================================
+   8. GRID PORTOFOLIO & KARTU BOOTSTRAP 5 (.card)
+   ========================================================================== */
+.portfolio-card {
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  background-color: var(--surface-bg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+/* Pseudo-element ::before untuk ornamen kartu */
+.portfolio-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-brand), var(--accent-blush));
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 2;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: var(--shadow-lift);
+  border-color: var(--accent-blush);
+}
+
+.portfolio-card:hover::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.portfolio-img-wrap {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1.5px solid var(--border-subtle);
+  aspect-ratio: 16 / 10;
+}
+
+.portfolio-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.portfolio-card:hover .portfolio-img-wrap img {
+  transform: scale(1.05);
+}
+
+/* Badge Kategori */
+.portfolio-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: rgba(255, 253, 253, 0.94);
+  color: var(--primary-brand);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 6px rgba(222, 93, 131, 0.15);
+  z-index: 1;
+}
+
+.portfolio-card .card-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.portfolio-kicker {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--accent-dusty);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.portfolio-card .card-title {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+  color: var(--accent-deep);
+}
+
+.portfolio-card .card-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.portfolio-meta {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border-subtle);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ==========================================================================
+   9. BOOTSTRAP MODAL DIALOGS (.modal)
+   ========================================================================== */
+.custom-modal .modal-content {
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  background-color: var(--surface-bg);
+  box-shadow: 0 20px 48px -10px rgba(125, 27, 54, 0.25);
+  overflow: hidden;
+}
+
+.custom-modal .modal-header {
+  background: linear-gradient(135deg, var(--bg-alt) 0%, var(--surface-bg) 100%);
+  border-bottom: 1.5px solid var(--border-subtle);
+  padding: 20px 24px;
+}
+
+.custom-modal .modal-title {
+  font-family: var(--font-title);
+  color: var(--accent-deep);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.custom-modal .modal-body {
+  padding: 24px;
+  font-size: 0.94rem;
+  color: var(--text-main);
+}
+
+.custom-modal .modal-footer {
+  border-top: 1.5px solid var(--border-subtle);
+  background-color: var(--bg-page);
+  padding: 16px 24px;
+}
+
+.tech-badge-pill {
+  background-color: var(--primary-subtle);
+  color: var(--primary-brand);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+/* ==========================================================================
+   10. TABEL RIWAYAT AKADEMIK
+   ========================================================================== */
+.table-custom-card {
+  background-color: var(--surface-bg);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.table-custom-card table {
+  margin-bottom: 0;
+}
+
+.table-custom-card thead th {
+  background: linear-gradient(135deg, var(--primary-brand) 0%, #FF8DA1 100%);
+  color: var(--text-light);
+  font-family: var(--font-title);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 16px 20px;
+  border-bottom: none;
+}
+
+.table-custom-card tbody td,
+.table-custom-card tbody th {
+  padding: 14px 20px;
+  font-size: 0.92rem;
+  border-bottom: 1px solid var(--border-muted);
+}
+
+/* Pseudo-class :nth-child(even) */
+.table-custom-card tbody tr:nth-child(even) {
+  background-color: #FFF9FA;
+}
+
+.table-custom-card tbody tr:hover {
+  background-color: var(--bg-alt);
+}
+
+.table-custom-card tfoot {
+  background-color: var(--bg-alt);
+  font-weight: 700;
+  color: var(--accent-deep);
+  border-top: 2px solid var(--border-subtle);
+}
+
+.badge-status {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.badge-status-jalan {
+  background-color: var(--primary-subtle);
+  color: var(--primary-brand);
+  border: 1px solid var(--border-subtle);
+}
+.badge-status-lulus {
+  background-color: #EBF7EE;
+  color: #2E7D32;
+  border: 1px solid #C8E6C9;
+}
+
+/* ==========================================================================
+   11. MODERNISASI FORMULIR LAYANAN (FLOATING LABELS & VALIDATION)
+   ========================================================================== */
+.form-card {
+  background-color: var(--surface-bg);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 36px);
+  box-shadow: var(--shadow-card);
+}
+
+.custom-fieldset {
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 20px 22px 14px;
+  margin-bottom: 22px;
+  background-color: #FFFCFD;
+}
+
+.custom-fieldset legend {
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  padding-inline: 10px;
+  width: auto;
+  float: none;
+}
+
+/* Floating labels penyesuaian */
+.form-floating > .form-control,
+.form-floating > .form-control-plaintext {
+  padding: 1.2rem 0.95rem 0.5rem;
+}
+
+.form-floating > label {
+  color: var(--text-muted);
+  font-weight: 600;
+  padding-left: 0.95rem;
+}
+
+.form-control,
+.form-select {
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--text-main);
+  background-color: var(--surface-bg);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Pseudo-class :focus-within pada input-group dan form-floating */
+.input-group:focus-within,
+.form-floating:focus-within {
+  border-radius: var(--radius-sm);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-brand);
+  box-shadow: 0 0 0 4px rgba(222, 93, 131, 0.18);
+  outline: none;
+}
+
+.input-group-text {
+  background-color: var(--primary-subtle);
+  border: 1.5px solid var(--border-subtle);
+  border-right: none;
+  color: var(--primary-brand);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  font-size: 1rem;
+}
+
+.input-group-text + .form-control {
+  border-left: 1.5px solid var(--border-subtle);
+}
+
+/* Radio & Checkbox Card Style */
+.choice-card-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-bg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.choice-card-item:hover {
+  border-color: var(--accent-blush);
+  background-color: var(--bg-alt);
+}
+
+.choice-card-item:has(input:checked) {
+  border-color: var(--primary-brand);
+  background-color: #FFE8EE;
+  font-weight: 600;
+  color: var(--accent-deep);
+  box-shadow: 0 2px 8px rgba(222, 93, 131, 0.12);
+}
+
+.form-check-input {
+  accent-color: var(--primary-brand);
+  cursor: pointer;
+}
+.form-check-input:checked {
+  background-color: var(--primary-brand);
+  border-color: var(--primary-brand);
+}
+
+/* Validasi Bootstrap Feedback */
+.valid-feedback {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #2E7D32;
+}
+
+.invalid-feedback {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #C62828;
+}
+
+/* =========================================================
+   12. ASIDE (CATATAN LAYANAN)
+   ========================================================= */
+.aside-memo {
+  background-color: var(--surface-bg);
+  border: 1.5px solid var(--border-subtle);
+  border-top: 4px solid var(--primary-brand);
+  border-radius: var(--card-radius);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+  position: sticky;
+  top: 96px;
+}
+
+.aside-memo dt {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  margin-bottom: 4px;
+}
+
+.aside-memo dd {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.aside-memo a {
+  color: var(--primary-brand);
+  font-weight: 700;
+  text-decoration: none;
+}
+.aside-memo a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   13. FOOTER
+   ========================================================================== */
+.custom-footer {
+  background-color: #2E1A22;
+  color: #F7E8ED;
+  padding-block: 40px;
+  border-top: 2px solid #54313E;
+}
+
+.footer-title {
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  color: #FFCCD5;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.footer-copy {
+  font-size: 0.82rem;
+  color: #D4B5C1;
+}
+
+.footer-nav {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  gap: 18px;
+  margin-bottom: 0;
+}
+
+.footer-nav a {
+  color: #F7E8ED;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: color 0.2s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--accent-blush);
+  text-decoration: underline;
+}
+
+.footer-campus {
+  color: #C09EA9;
+  font-size: 0.82rem;
+}
+
+/* ==========================================================================
+   14. RESPONSIVE BREAKPOINT TWEAKS
+   ========================================================================== */
+@media (max-width: 991.98px) {
+  .aside-memo {
+    position: static;
+    margin-top: 24px;
+  }
+  .custom-navbar .navbar-nav {
+    padding-top: 12px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero-avatar-img {
+    width: 190px;
+    height: 190px;
+  }
+  .btn-primary-custom,
+  .btn-outline-custom {
+    width: 100%;
+  }
+  .skills-list > li {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Aksesibilitas prefers-reduced-motion tanpa !important */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-avatar-img,
+  .portfolio-card,
+  .metric-card-box,
+  .metric-card-box::before,
+  .portfolio-card::before,
+  .btn-primary-custom,
+  .btn-outline-custom {
+    transition: none;
+    transform: none;
+  }
+}

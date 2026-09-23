@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="siadelBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0F5"/>
+      <stop offset="50%" stop-color="#FFE4EC"/>
+      <stop offset="100%" stop-color="#FCD5E2"/>
+    </linearGradient>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#DE5D83"/>
+      <stop offset="100%" stop-color="#FF8DA1"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFFDFD"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#DE5D83" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="800" height="440" fill="url(#siadelBg)"/>
+
+  <!-- Subtle Decorative Circles -->
+  <circle cx="720" cy="80" r="160" fill="#FFCCD5" opacity="0.35"/>
+  <circle cx="80" cy="380" r="140" fill="#FFB6C1" opacity="0.25"/>
+
+  <!-- Floating UI Window Mockup -->
+  <g transform="translate(100, 45)" filter="url(#cardShadow)">
+    <!-- Window Container -->
+    <rect width="600" height="340" rx="16" fill="url(#cardGrad)" stroke="#F2D2D9" stroke-width="2"/>
+    
+    <!-- Window Header -->
+    <path d="M0 16 C0 7.16 7.16 0 16 0 L584 0 C592.84 0 600 7.16 600 16 L600 48 L0 48 Z" fill="url(#headerGrad)"/>
+    
+    <!-- Window Control Dots -->
+    <circle cx="28" cy="24" r="6" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="48" cy="24" r="6" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="68" cy="24" r="6" fill="#FFFFFF" opacity="0.4"/>
+    
+    <!-- Window Title -->
+    <text x="300" y="30" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">SIA DEL COMPANION · DASHBOARD</text>
+
+    <!-- Sidebar Mini -->
+    <rect x="24" y="68" width="130" height="248" rx="10" fill="#FFF5F8" stroke="#FCE3E8" stroke-width="1"/>
+    <rect x="38" y="86" width="102" height="12" rx="6" fill="#DE5D83" opacity="0.8"/>
+    <rect x="38" y="112" width="85" height="10" rx="5" fill="#DCAE96"/>
+    <rect x="38" y="134" width="75" height="10" rx="5" fill="#DCAE96"/>
+    <rect x="38" y="156" width="90" height="10" rx="5" fill="#DCAE96"/>
+    <rect x="38" y="178" width="65" height="10" rx="5" fill="#DCAE96"/>
+
+    <!-- Main Content Area: Metric Cards -->
+    <g transform="translate(170, 68)">
+      <!-- Metric 1: IPK -->
+      <rect x="0" y="0" width="125" height="74" rx="10" fill="#FFFFFF" stroke="#F2D2D9" stroke-width="1"/>
+      <text x="14" y="24" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#6B5B60">Indeks Prestasi</text>
+      <text x="14" y="54" font-family="'Segoe UI', sans-serif" font-size="22" font-weight="800" fill="#DE5D83">3.88</text>
+      <circle cx="106" cy="22" r="8" fill="#FFF0F5"/>
+      <text x="106" y="26" font-size="10" text-anchor="middle" fill="#DE5D83">★</text>
+
+      <!-- Metric 2: SKS Selesai -->
+      <rect x="140" y="0" width="125" height="74" rx="10" fill="#FFFFFF" stroke="#F2D2D9" stroke-width="1"/>
+      <text x="154" y="24" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#6B5B60">Total SKS Lulus</text>
+      <text x="154" y="54" font-family="'Segoe UI', sans-serif" font-size="22" font-weight="800" fill="#7D1B36">74 SKS</text>
+      <circle cx="246" cy="22" r="8" fill="#FFF0F5"/>
+      <text x="246" y="26" font-size="10" text-anchor="middle" fill="#7D1B36">✓</text>
+
+      <!-- Metric 3: Kehadiran -->
+      <rect x="280" y="0" width="125" height="74" rx="10" fill="#FFFFFF" stroke="#F2D2D9" stroke-width="1"/>
+      <text x="294" y="24" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#6B5B60">Presensi Kuliah</text>
+      <text x="294" y="54" font-family="'Segoe UI', sans-serif" font-size="22" font-weight="800" fill="#2E7D32">98.5%</text>
+      <circle cx="386" cy="22" r="8" fill="#EBF7EE"/>
+      <text x="386" y="26" font-size="10" text-anchor="middle" fill="#2E7D32">●</text>
+
+      <!-- Jadwal Kuliah List / Graphic -->
+      <rect x="0" y="90" width="405" height="158" rx="10" fill="#FFFFFF" stroke="#F2D2D9" stroke-width="1"/>
+      <text x="16" y="115" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#2E282A">Jadwal Perkuliahan Hari Ini</text>
+      
+      <!-- Row 1 -->
+      <rect x="16" y="128" width="373" height="32" rx="6" fill="#FFF5F8"/>
+      <circle cx="32" cy="144" r="5" fill="#DE5D83"/>
+      <text x="46" y="148" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#2E282A">Pemrograman &amp; Pengujian Web (12S3101)</text>
+      <text x="375" y="148" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#DE5D83" text-anchor="end">08.00 - 10.00</text>
+
+      <!-- Row 2 -->
+      <rect x="16" y="168" width="373" height="32" rx="6" fill="#FFFDFD" stroke="#FCE3E8" stroke-width="1"/>
+      <circle cx="32" cy="184" r="5" fill="#DCAE96"/>
+      <text x="46" y="188" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#2E282A">Manajemen Proyek Sistem Informasi</text>
+      <text x="375" y="188" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#6B5B60" text-anchor="end">13.00 - 15.00</text>
+
+      <!-- Row 3 -->
+      <rect x="16" y="208" width="373" height="30" rx="6" fill="#FFFDFD"/>
+      <circle cx="32" cy="223" r="5" fill="#7D1B36"/>
+      <text x="46" y="227" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#2E282A">Praktikum Mandiri &amp; Evaluasi Laboratorium</text>
+      <text x="375" y="227" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#7D1B36" text-anchor="end">15.30 - 17.00</text>
+    </g>
+  </g>
+
+  <!-- Sparkles & Embellishments -->
+  <text x="730" y="380" font-size="28" fill="#DE5D83" opacity="0.6">✧</text>
+  <text x="68" y="120" font-size="24" fill="#DE5D83" opacity="0.5">✧</text>
+</svg>
