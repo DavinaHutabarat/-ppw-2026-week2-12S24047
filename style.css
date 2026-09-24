@@ -1,5 +1,832 @@
-/* ==========================================================================
-   TUGAS PRAKTIKUM MINGGU 03: PEMROGRAMAN DAN PENGUJIAN WEB (12S3101)
-   Mengimpor custom-style.css untuk keselarasan berkas styling portofolio
-   ========================================================================== */
-@import url('custom-style.css');
+
+/* =========================================================
+   1. CSS CUSTOM PROPERTIES (ROOT VARIABLES - MINIMAL 6 VARIABEL)
+   Memenuhi Indikator 3 & Evaluasi Custom Overrides & Theming
+   ========================================================= */
+:root {
+  /* Palet Warna Primer & Aksen Personal */
+  --primary-brand:    #DE5D83; /* Cherry Rose */
+  --primary-hover:    #B83256; /* Cherry Dark */
+  --primary-deep:     #7D1B36; /* Deep Maroon Plum */
+  --primary-soft:     #FFCCD5; /* Soft Blush Pink */
+  --baby-pink:        #FFB6C1; /* Accent Baby Pink */
+  --pink-light:       #FFE3E8; /* Tint Pink */
+  --dusty-rose:       #DCAE96; /* Elegant Neutral Rose */
+
+  /* Warna Permukaan & Background */
+  --surface-bg:       #FFFFFF; /* Pure White */
+  --surface-page:     #FFFDFD; /* Clean Blush White */
+  --surface-alt:      #FFF0F4; /* Soft Pastel Container */
+  --surface-panel:    #FFF8FA; /* Card Surface Accent */
+  --surface-checked:  #FFE8EE; /* Selected State */
+
+  /* Tipografi & Kontras Teks WCAG AA */
+  --text-main:        #2E282A; /* Deep Charcoal Plum */
+  --text-muted:       #6B5B60; /* Soft Charcoal */
+  --border-color:     #F2D2D9; /* Soft Rose Border */
+  --border-color-alt: #FCE3E8; /* Light Hairline */
+
+  /* Font Families */
+  --font-title:       "Playfair Display", Georgia, serif;
+  --font-script:      "Great Vibes", cursive;
+  --font-body:        "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Jarak & Bentuk (Geometry) */
+  --card-radius:      18px;
+  --radius-pill:      999px;
+  --radius-sm:        12px;
+
+  /* Elevasi Bayangan (Shadow System) */
+  --shadow-sm:        0 4px 14px rgba(222, 93, 131, 0.08);
+  --shadow-lift:      0 12px 28px -4px rgba(222, 93, 131, 0.18), 0 4px 12px -2px rgba(255, 182, 193, 0.22);
+  --shadow-btn:       0 8px 20px -4px rgba(222, 93, 131, 0.35);
+
+  /* Transisi Halus */
+  --transition-smooth: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* =========================================================
+   2. DASAR HALAMAN & SCROLLBAR KUSTOM
+   ========================================================= */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.68;
+  color: var(--text-main);
+  background-color: var(--surface-page);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Scrollbar Cantik bernuansa Ballet-Core */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface-page);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--baby-pink);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--surface-page);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-brand);
+}
+
+::selection {
+  background-color: var(--primary-soft);
+  color: var(--primary-deep);
+}
+
+/* Aksesibilitas: Skip to Content */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--primary-deep);
+  color: #FFFFFF;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  z-index: 1050;
+  text-decoration: none;
+  box-shadow: var(--shadow-lift);
+}
+.skip-link:focus {
+  left: 20px;
+  top: 20px;
+}
+
+/* Aksesibilitas: Keyboard Focus Ring Terstandarisasi */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--primary-brand);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* =========================================================
+   3. SELEKTOR TINGKAT LANJUT: PSEUDO-CLASSES :is() & :not()
+   ========================================================= */
+:is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-title);
+  font-weight: 700;
+  color: var(--primary-deep);
+  letter-spacing: -0.01em;
+}
+
+/* Link biasa yang bukan button */
+a:not(.btn):not(.nav-link):not(.brand) {
+  color: var(--primary-brand);
+  transition: var(--transition-smooth);
+}
+a:not(.btn):not(.nav-link):not(.brand):hover {
+  color: var(--primary-hover);
+}
+
+/* Utility Helpers */
+.text-cherry { color: var(--primary-brand); }
+.bg-card-panel { background-color: var(--surface-panel); }
+.border-custom { border: 1.5px solid var(--border-color); }
+
+.heart-accent, .sparkle-accent {
+  color: var(--primary-brand);
+  font-size: 1.15em;
+  vertical-align: middle;
+}
+
+/* Kicker script manis ala kaligrafi */
+.section-script-kicker {
+  font-family: var(--font-script);
+  font-size: 2rem;
+  color: var(--primary-brand);
+  display: block;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.bagian-alt {
+  background-color: var(--surface-alt);
+  border-block: 1px solid var(--border-color);
+}
+
+.bagian-lede {
+  color: var(--text-muted);
+  max-width: 65ch;
+  margin-inline: auto;
+  font-size: 1rem;
+}
+
+/* =========================================================
+   4. RESPONSIVE BOOTSTRAP NAVBAR (STICKY-TOP & BRAND IDENTITY)
+   Memenuhi Indikator 6 & Evaluasi Responsive Navbar
+   ========================================================= */
+.custom-navbar {
+  background-color: rgba(255, 253, 253, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1.5px solid var(--border-color);
+  padding-block: 12px;
+  transition: var(--transition-smooth);
+}
+
+.brand-ribbon {
+  transition: transform 0.3s ease;
+}
+.navbar-brand:hover .brand-ribbon {
+  transform: rotate(12deg) scale(1.1);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.brand-text strong {
+  font-family: var(--font-title);
+  font-size: 1.12rem;
+  color: var(--primary-deep);
+}
+.brand-text span {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--dusty-rose);
+  letter-spacing: 0.02em;
+}
+
+/* Combinator anak langsung (A > B): Navbar Links */
+.navbar-nav > .nav-item > .nav-link {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  transition: var(--transition-smooth);
+}
+
+.navbar-nav > .nav-item > .nav-link:hover,
+.navbar-nav > .nav-item > .nav-link.active {
+  background-color: var(--surface-alt);
+  color: var(--primary-brand);
+  transform: translateY(-1.5px);
+}
+
+.nav-btn-cta {
+  background: linear-gradient(135deg, var(--surface-alt) 0%, #FFEBF0 100%);
+  border: 1px solid var(--border-color);
+  color: var(--primary-brand);
+}
+
+/* =========================================================
+   5. HERO SECTION & CALL-TO-ACTION (CTA)
+   ========================================================= */
+.hero {
+  background: radial-gradient(circle at 85% 30%, rgba(255, 182, 193, 0.28) 0%, rgba(255, 253, 253, 0) 65%),
+              radial-gradient(circle at 15% 85%, rgba(220, 174, 150, 0.22) 0%, rgba(255, 253, 253, 0) 60%);
+  border-bottom: 1.5px solid var(--border-color);
+}
+
+.hero-script-tag {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: var(--primary-brand);
+  display: block;
+}
+
+.hero-kicker {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--dusty-rose);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.22;
+}
+
+.hero-lede {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.hero-figure {
+  display: inline-block;
+}
+
+.hero-avatar-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-profile-img {
+  width: 250px;
+  height: 250px;
+  border-radius: 28px;
+  border: 4px solid #FFFFFF;
+  outline: 2px solid var(--border-color);
+  box-shadow: var(--shadow-lift);
+  object-fit: cover;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hero-profile-img:hover {
+  transform: scale(1.03) rotate(-1deg);
+  box-shadow: 0 18px 36px -4px rgba(222, 93, 131, 0.28);
+}
+
+.hero-figure figcaption {
+  font-size: 0.84rem;
+  color: var(--dusty-rose);
+}
+
+/* =========================================================
+   6. TOMBOL ELEGAN COQUETTE (ROUNDED PILL)
+   ========================================================= */
+.btn-utama {
+  background: linear-gradient(135deg, var(--primary-brand) 0%, #FF8DA1 100%);
+  color: #FFFFFF;
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  padding: 12px 26px;
+  font-weight: 700;
+  box-shadow: var(--shadow-btn);
+  transition: var(--transition-smooth);
+}
+.btn-utama:hover {
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary-brand) 100%);
+  color: #FFFFFF;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 24px -4px rgba(222, 93, 131, 0.45);
+}
+
+.btn-garis {
+  background-color: #FFFFFF;
+  color: var(--primary-deep);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  padding: 12px 24px;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+.btn-garis:hover {
+  border-color: var(--primary-brand);
+  color: var(--primary-brand);
+  background-color: var(--surface-alt);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+}
+
+/* =========================================================
+   7. LAB 1: METRIC CARD DENGAN PSEUDO-ELEMENT ::before
+   Memenuhi Kegiatan Praktikum Terbimbing Lab 1
+   ========================================================= */
+.metric-card {
+  position: relative;
+  background: var(--surface-bg);
+  border: 1.5px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Micro-interaction dengan Pseudo-Element top bar */
+.metric-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: var(--primary-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lift);
+}
+
+.metric-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Pseudo-class :focus-within */
+.metric-card:focus-within {
+  border-color: var(--primary-brand);
+  box-shadow: 0 0 0 3px rgba(222, 93, 131, 0.2);
+}
+
+.metric-card .card-icon {
+  font-size: 1.8rem;
+  color: var(--primary-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: var(--surface-alt);
+  border-radius: var(--radius-sm);
+}
+
+.metric-card .card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--dusty-rose);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.metric-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary-deep);
+  line-height: 1.2;
+}
+
+/* =========================================================
+   8. TENTANG SAYA & DAFTAR KEAHLIAN
+   ========================================================= */
+.daftar-keahlian {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.daftar-keahlian li {
+  background-color: var(--surface-bg);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  padding: 7px 16px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--primary-deep);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+.daftar-keahlian li:hover {
+  background-color: var(--surface-alt);
+  border-color: var(--primary-brand);
+  color: var(--primary-brand);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+
+.daftar-langkah {
+  color: var(--text-muted);
+}
+.daftar-langkah li {
+  margin-bottom: 12px;
+  padding-left: 6px;
+}
+.daftar-langkah li::marker {
+  color: var(--primary-brand);
+  font-weight: 700;
+}
+
+/* Adjacent sibling combinator (A + B) */
+p + p {
+  margin-top: 14px;
+}
+
+/* =========================================================
+   9. KARTU PORTOFOLIO BOOTSTRAP & MICRO-INTERACTIONS
+   Memenuhi Indikator 5 & Evaluasi Grid Portofolio & Modal
+   ========================================================= */
+.kartu-proyek {
+  background-color: var(--surface-bg);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+}
+
+.kartu-proyek:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: var(--shadow-lift);
+  border-color: var(--baby-pink);
+}
+
+.kartu-gambar-wrap {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1.5px solid var(--border-color);
+}
+
+.kartu-gambar {
+  width: 100%;
+  aspect-ratio: 20 / 11;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.kartu-proyek:hover .kartu-gambar {
+  transform: scale(1.06);
+}
+
+.kartu-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 253, 253, 0.94);
+  color: var(--primary-brand);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.kartu-isi {
+  padding: 24px;
+}
+
+.kartu-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--dusty-rose);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.badge-custom {
+  background-color: var(--surface-alt);
+  color: var(--primary-deep);
+  border: 1px solid var(--border-color);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.btn-modal-trigger {
+  background-color: var(--surface-alt);
+  color: var(--primary-brand);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  padding: 9px 18px;
+  transition: var(--transition-smooth);
+}
+.btn-modal-trigger:hover {
+  background-color: var(--primary-brand);
+  color: #FFFFFF;
+  border-color: var(--primary-brand);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* =========================================================
+   10. TABEL RIWAYAT AKADEMIK DENGAN PSEUDO-CLASS :nth-child()
+   ========================================================= */
+.custom-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-header-custom {
+  background: linear-gradient(135deg, var(--primary-brand) 0%, #FF8DA1 100%);
+  color: #FFFFFF;
+}
+
+.table-header-custom th {
+  color: #FFFFFF;
+  font-weight: 600;
+  font-family: var(--font-title);
+  border-bottom: none;
+}
+
+/* Seleksi baris genap :nth-child(even) */
+.custom-table tbody tr:nth-child(even) {
+  background-color: #FFF9FA;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #FFF0F4;
+}
+
+.table-footer-custom {
+  background-color: #FFF2F5;
+  border-top: 2px solid var(--border-color);
+}
+
+.badge-status-jalan {
+  background-color: #FFF0F3;
+  color: var(--primary-brand);
+  border: 1px solid var(--border-color);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+}
+
+.badge-status-lulus {
+  background-color: #EBF7EE;
+  color: #2E7D32;
+  border: 1px solid #C8E6C9;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+}
+
+/* =========================================================
+   11. MODERNISASI FORMULIR: FLOATING LABELS & VALIDASI
+   Memenuhi Indikator 7 & Evaluasi Modernisasi Formulir
+   ========================================================= */
+.form-section-group {
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 22px 20px 10px;
+  background-color: #FFFCFD;
+}
+
+.form-section-legend {
+  float: none;
+  width: auto;
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-deep);
+  padding-inline: 8px;
+  margin-bottom: 12px;
+}
+
+.wajib {
+  color: var(--primary-brand);
+}
+
+/* Input Group kustom */
+.input-group-text {
+  background-color: var(--surface-alt);
+  border: 1.5px solid var(--border-color);
+  border-right: none;
+  color: var(--primary-brand);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.input-group .form-control {
+  border: 1.5px solid var(--border-color);
+  border-left: none;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-family: var(--font-body);
+}
+
+/* Floating labels custom override */
+.form-floating > .form-control,
+.form-floating > .form-select {
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  background-color: #FFFFFF;
+  transition: var(--transition-smooth);
+}
+
+.form-floating > label {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+/* Pseudo-class :focus-within pada form floating */
+.form-floating:focus-within > label {
+  color: var(--primary-brand);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-brand);
+  box-shadow: 0 0 0 4px rgba(222, 93, 131, 0.15);
+  background-color: #FFFFFF;
+}
+
+/* Adjacent sibling combinator pada floating elements */
+.form-floating + .form-floating {
+  margin-top: 14px;
+}
+
+/* Radio & Checkbox Items */
+.custom-radio-item,
+.custom-check-item {
+  padding: 10px 14px 10px 38px;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: #FFFFFF;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.custom-radio-item:hover,
+.custom-check-item:hover {
+  border-color: var(--baby-pink);
+  background-color: var(--surface-alt);
+}
+
+.form-check-input {
+  border-color: var(--border-color);
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: var(--primary-brand);
+  border-color: var(--primary-brand);
+}
+
+/* General sibling combinator (A ~ B): Checkbox & Radio Label State */
+.form-check-input:checked ~ .form-check-label {
+  color: var(--primary-deep);
+  font-weight: 600;
+}
+
+.custom-terms-box {
+  background-color: var(--surface-alt);
+  border: 1.5px dashed var(--border-color);
+}
+
+/* Umpan balik validasi visual (Valid & Invalid Feedback) */
+.invalid-feedback {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #DC3545;
+  margin-top: 4px;
+}
+
+.valid-feedback {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #198754;
+  margin-top: 4px;
+}
+
+/* =========================================================
+   12. ASIDE (INFORMASI KONSULTASI & TANYA JAWAB)
+   ========================================================= */
+.samping {
+  border-top: 4px solid var(--primary-brand);
+  position: sticky;
+  top: 90px;
+}
+
+.tanya-jawab dt {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--primary-deep);
+  margin-bottom: 4px;
+}
+
+/* General sibling combinator pada definisi daftar tanya-jawab */
+.tanya-jawab dt + dd {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   13. FOOTER
+   ========================================================= */
+.site-footer {
+  background-color: #2E1A22;
+  color: #F7E8ED;
+  border-top: 2px solid #54313E;
+}
+
+.footer-title {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  color: #FFCCD5;
+}
+
+.footer-copy {
+  color: #D4B5C1;
+}
+
+.footer-nav-links a {
+  color: #F7E8ED;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+.footer-nav-links a:hover {
+  color: var(--baby-pink);
+  text-decoration: underline;
+}
+
+.footer-kampus {
+  color: #C09EA9;
+}
+
+/* =========================================================
+   14. BOOTSTRAP MODAL OVERRIDES
+   ========================================================= */
+.custom-modal-content {
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--border-color);
+}
+
+.modal-preview-img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+/* =========================================================
+   15. MEDIA QUERIES & ACCESSIBILITY (NO !important)
+   ========================================================= */
+@media (max-width: 991.98px) {
+  .samping {
+    position: static;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero-title {
+    font-size: 1.85rem;
+  }
+  .hero-profile-img {
+    width: 180px;
+    height: 180px;
+  }
+  .form-section-group {
+    padding: 18px 14px 6px;
+  }
+}
+
+/* Hormati preferensi aksesibilitas pengguna (zero !important) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
+  }
+}
