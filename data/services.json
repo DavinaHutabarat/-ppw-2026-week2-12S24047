@@ -1,0 +1,22 @@
+[
+  {
+    "id": "portofolio",
+    "name": "Perancangan Portfolio & Personal Branding",
+    "description": "Penyusunan desain web portofolio responsif, tata letak grid semantik, dan styling bertema manis & elegan."
+  },
+  {
+    "id": "formulir",
+    "name": "Modernisasi Formulir & Interaktivitas Web",
+    "description": "Implementasi form modern dengan floating labels, validasi visual dua arah, dan pengiriman asinkron DTO."
+  },
+  {
+    "id": "audit",
+    "name": "Audit Aksesibilitas WCAG & Responsivitas Grid",
+    "description": "Pengujian kepatuhan kontras warna, keyboard navigation, dan responsivitas fluid di semua breakpoint."
+  },
+  {
+    "id": "pendampingan",
+    "name": "Pendampingan Tugas Praktikum Front-End",
+    "description": "Sesi diskusi dan asistensi pengerjaan tugas modul praktikum web, debugging CSS/JS, dan standar industri."
+  }
+]

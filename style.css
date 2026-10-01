@@ -830,3 +830,49 @@ p + p {
     scroll-behavior: auto;
   }
 }
+
+
+/* Tombol Filter Kategori Portofolio */
+.filter-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-btn {
+  background-color: var(--surface-bg);
+  color: var(--primary-deep);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  padding: 6px 18px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background-color: var(--primary-brand);
+  color: #FFFFFF;
+  border-color: var(--primary-brand);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-btn);
+}
+
+/* Skeleton Loading Shimmer Matching Ballet-Core */
+.placeholder-glow .placeholder {
+  background-color: #F7DDE3;
+  opacity: 0.7;
+}
+
+/* Toast Styling Beraksen Cherry Rose */
+.custom-toast {
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--border-color);
+  border-radius: 14px;
+}
+.custom-toast .toast-header {
+  background-color: var(--surface-alt);
+  color: var(--primary-deep);
+  border-bottom: 1px solid var(--border-color);
+}

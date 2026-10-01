@@ -20,7 +20,7 @@
   <!-- 2. Bootstrap Icons 1.11.3 CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-  <!-- 3. Custom CSS Overrides (Dimuat SETELAH Bootstrap sesuai spesifikasi modul) -->
+  <!-- 3. Custom CSS Overrides -->
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -64,7 +64,10 @@
               <a class="nav-link" href="#akademik"><i class="bi bi-journal-bookmark me-1"></i>Akademik</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-btn-cta" href="#layanan"><i class="bi bi-envelope-heart me-1"></i>Pesan Layanan</a>
+              <a class="nav-link nav-btn-cta d-inline-flex align-items-center gap-1" href="#layanan">
+                <i class="bi bi-envelope-heart me-1"></i>Pesan Layanan
+                <span id="orderBadge" class="badge rounded-pill bg-danger" style="display: none; font-size: 0.72rem;">0</span>
+              </a>
             </li>
           </ul>
         </div>
@@ -117,7 +120,7 @@
       </div>
     </section>
 
-    <!-- ============ LAB 1: METRIC / STATISTIC HIGHLIGHTS ============ -->
+    <!-- ============ METRIC / STATISTIC HIGHLIGHTS ============ -->
     <section class="metrik-section py-4" aria-label="Statistik dan Pencapaian">
       <div class="container">
         <div class="row g-3">
@@ -211,136 +214,27 @@
       </div>
     </section>
 
-    <!-- ============ SECTION 2: PORTOFOLIO KARYA (GRID & MODAL) ============ -->
+    <!-- ============ SECTION 2: PORTOFOLIO KARYA (DYNAMIC CSR) ============ -->
     <section id="portofolio" class="bagian bagian-alt py-5" aria-labelledby="judul-portofolio">
       <div class="container">
         <div class="section-intro text-center mb-4">
           <span class="section-script-kicker">my portfolio</span>
           <h2 id="judul-portofolio">Portofolio Karya <span class="sparkle-accent" aria-hidden="true">✧</span></h2>
           <p class="bagian-lede">Koleksi proyek pilihan yang memadukan rekayasa perangkat lunak dan keanggunan antarmuka.</p>
+          
+          <!-- Filter Kategori Portofolio -->
+          <div class="filter-btn-group justify-content-center mt-3">
+            <button type="button" class="btn filter-btn active" data-filter="all">Semua</button>
+            <button type="button" class="btn filter-btn" data-filter="B2B AgriTech">AgriTech</button>
+            <button type="button" class="btn filter-btn" data-filter="Community">Community</button>
+            <button type="button" class="btn filter-btn" data-filter="Transportasi">Transportasi</button>
+            <button type="button" class="btn filter-btn" data-filter="E-Commerce">E-Commerce</button>
+          </div>
         </div>
 
-        <!-- 
-          GRID PORTOFOLIO: Wajib minimal 4 buah Kartu Proyek (.card) 
-          dalam grid responsif (row-cols-1 row-cols-md-2 row-cols-lg-3 g-4)
-        -->
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-
-          <!-- Kartu 1: AndaliTrack -->
-          <div class="col">
-            <article class="card h-100 kartu-proyek border-0 shadow-sm">
-              <div class="kartu-gambar-wrap">
-                <img class="card-img-top kartu-gambar" src="assets/proyek-andalitrack.jpg" alt="Tangkapan layar antarmuka AndaliTrack" loading="lazy">
-                <span class="kartu-badge">B2B AgriTech</span>
-              </div>
-              <div class="card-body kartu-isi d-flex flex-column">
-                <p class="kartu-label">Marketplace B2B</p>
-                <h3 class="card-title">AndaliTrack</h3>
-                <p class="card-text">
-                  Menghubungkan petani andaliman di kawasan Toba dengan pembeli skala industri komersial,
-                  lengkap dengan fitur estimasi panen dan rantai pasok.
-                </p>
-                <div class="badge-tech-group mb-3 d-flex flex-wrap gap-1">
-                  <span class="badge badge-custom">HTML5</span>
-                  <span class="badge badge-custom">CSS3 Grid</span>
-                  <span class="badge badge-custom">Riset Lapangan</span>
-                </div>
-                <div class="kartu-meta mt-auto pt-3 border-top">
-                  <button type="button" class="btn btn-sm btn-modal-trigger w-100" data-bs-toggle="modal" data-bs-target="#modalAndaliTrack">
-                    <span>Lihat Detail Proyek</span>
-                    <i class="bi bi-arrow-up-right-circle ms-1"></i>
-                  </button>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <!-- Kartu 2: PartyUp! -->
-          <div class="col">
-            <article class="card h-100 kartu-proyek border-0 shadow-sm">
-              <div class="kartu-gambar-wrap">
-                <img class="card-img-top kartu-gambar" src="assets/proyek-partyup.jpg" alt="Tangkapan layar antarmuka PartyUp!" loading="lazy">
-                <span class="kartu-badge">Community</span>
-              </div>
-              <div class="card-body kartu-isi d-flex flex-column">
-                <p class="kartu-label">Situs Statis Kolaboratif</p>
-                <h3 class="card-title">PartyUp!</h3>
-                <p class="card-text">
-                  Platform bagi mahasiswa IT Del untuk mencari rekan setim lomba hackathon dan tugas besar,
-                  dengan nuansa visual retro RPG gamification.
-                </p>
-                <div class="badge-tech-group mb-3 d-flex flex-wrap gap-1">
-                  <span class="badge badge-custom">HTML5 Semantik</span>
-                  <span class="badge badge-custom">CSS Flexbox</span>
-                  <span class="badge badge-custom">UI/UX Retro</span>
-                </div>
-                <div class="kartu-meta mt-auto pt-3 border-top">
-                  <button type="button" class="btn btn-sm btn-modal-trigger w-100" data-bs-toggle="modal" data-bs-target="#modalPartyUp">
-                    <span>Lihat Detail Proyek</span>
-                    <i class="bi bi-arrow-up-right-circle ms-1"></i>
-                  </button>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <!-- Kartu 3: TitikMu-->
-          <div class="col">
-            <article class="card h-100 kartu-proyek border-0 shadow-sm">
-              <div class="kartu-gambar-wrap">
-                <img class="card-img-top kartu-gambar" src="assets/ProyekTitikMu.png" alt="Tangkapan layar antarmuka TitikMu" loading="lazy">
-                <span class="kartu-badge">Transportasi</span>
-              </div>
-              <div class="card-body kartu-isi d-flex flex-column">
-                <p class="kartu-label">Platform Transportasi Digital</p>
-                <h3 class="card-title">TitikMu</h3>
-                <p class="card-text">
-                  TitikMu platform transportasi digital untuk wilayah Sumatra Utara, transportasi meliputi bus, kapal dan mobil travel. Aplikasi ini memudahkan pengguna untuk mencari rute perjalanan, jadwal keberangkatan, dan pemesanan tiket secara online.
-
-                </p>
-                <div class="badge-tech-group mb-3 d-flex flex-wrap gap-1">
-                  <span class="badge badge-custom">Product Design</span>
-                  <span class="badge badge-custom">WCAG 2.2</span>
-                  <span class="badge badge-custom">Bootstrap 5</span>
-                </div>
-                <div class="kartu-meta mt-auto pt-3 border-top">
-                  <button type="button" class="btn btn-sm btn-modal-trigger w-100" data-bs-toggle="modal" data-bs-target="#modalTitikMu">
-                    <span>Lihat Detail Proyek</span>
-                    <i class="bi bi-arrow-up-right-circle ms-1"></i>
-                  </button>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <!-- Kartu 4: AntonyMart  -->
-          <div class="col">
-            <article class="card h-100 kartu-proyek border-0 shadow-sm">
-              <div class="kartu-gambar-wrap">
-                <img class="card-img-top kartu-gambar" src="assets/proyek-antonymart.jpg" alt="Tangkapan layar antarmuka AntonyMart" loading="lazy">
-                <span class="kartu-badge">E-Commerce</span>
-              </div>
-              <div class="card-body kartu-isi d-flex flex-column">
-                <p class="kartu-label">Sistem Informasi Komunitas</p>
-                <h3 class="card-title">AntonyMart</h3>
-                <p class="card-text">
-                  Platform e-commerce AntonyMart untuk menjual produk-produk ke masyarakat daerah toba terkhusus mahasiswa IT Del.
-                </p>
-                <div class="badge-tech-group mb-3 d-flex flex-wrap gap-1">
-                  <span class="badge badge-custom">Bootstrap Grid</span>
-                  <span class="badge badge-custom">CSS Variables</span>
-                  <span class="badge badge-custom">Responsive UI</span>
-                </div>
-                <div class="kartu-meta mt-auto pt-3 border-top">
-                  <button type="button" class="btn btn-sm btn-modal-trigger w-100" data-bs-toggle="modal" data-bs-target="#modalAntonyMart">
-                    <span>Lihat Detail Proyek</span>
-                    <i class="bi bi-arrow-up-right-circle ms-1"></i>
-                  </button>
-                </div>
-              </div>
-            </article>
-          </div>
-
+        <!-- CONTAINER KARTU DINAMIS (DIRENDER DARI data/projects.json MELALUI app.js) -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="projects-container">
+          <!-- Kartu dinamis akan diinjeksi oleh js/app.js -->
         </div>
       </div>
     </section>
@@ -409,7 +303,7 @@
       </div>
     </section>
 
-    <!-- ============ SECTION 4: FORMULIR LAYANAN (MODERNISASI BOOTSTRAP 5) ============ -->
+    <!-- ============ SECTION 4: FORMULIR LAYANAN (ASINKRON REST DTO) ============ -->
     <section id="layanan" class="bagian bagian-alt py-5" aria-labelledby="judul-layanan">
       <div class="container">
         <div class="row g-4 g-lg-5 align-items-start">
@@ -420,10 +314,10 @@
               <div class="form-header-cute mb-4">
                 <span class="section-script-kicker">get in touch</span>
                 <h2 id="judul-layanan" class="h3 fw-bold">Pesan Layanan Konsultasi <span class="heart-accent" aria-hidden="true">♡</span></h2>
-                <p class="text-muted small">Silakan lengkapi formulir interaktif di bawah ini untuk konsultasi perancangan antarmuka web.</p>
+                <p class="text-muted small">Silakan lengkapi formulir di bawah ini. Permintaan dikirimkan asinkron via REST API tanpa memicu reload halaman.</p>
               </div>
 
-              <!-- Form dengan validasi Bootstrap class 'needs-validation' -->
+              <!-- Form dengan penanganan asinkron di app.js -->
               <form class="needs-validation form-layanan" novalidate id="formKonsultasi">
                 
                 <!-- Fieldset 1: Data Pemesan -->
@@ -444,7 +338,7 @@
 
                   <!-- Floating Label: Email Resmi -->
                   <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingEmail" placeholder="nama@students.del.ac.id" required>
+                    <input type="email" class="form-control" id="floatingEmail" name="email" placeholder="nama@students.del.ac.id" required>
                     <label for="floatingEmail"><i class="bi bi-envelope-heart me-1 text-cherry"></i> Alamat Email Resmi IT Del *</label>
                     <div class="invalid-feedback">Alamat email kampus valid (@students.del.ac.id atau @del.ac.id) wajib disertakan.</div>
                     <div class="valid-feedback">Format email valid!</div>
@@ -465,7 +359,7 @@
                     <div class="col-md-5">
                       <label for="floatingAngkatan" class="form-label fw-bold">Angkatan</label>
                       <div class="form-floating">
-                        <input type="number" class="form-control" id="floatingAngkatan" min="2018" max="2030" step="1" placeholder="2024">
+                        <input type="number" class="form-control" id="floatingAngkatan" name="angkatan" min="2018" max="2030" step="1" placeholder="2024">
                         <label for="floatingAngkatan"><i class="bi bi-calendar-check me-1 text-cherry"></i> Tahun Angkatan</label>
                       </div>
                     </div>
@@ -478,12 +372,12 @@
 
                   <!-- Select Kategori Layanan (Floating Label) -->
                   <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingKategoriLayanan" aria-label="Pilih Kategori Layanan" required>
+                    <select class="form-select" id="floatingKategoriLayanan" name="kategoriLayanan" aria-label="Pilih Kategori Layanan" required>
                       <option value="" selected disabled>Pilih paket layanan konsultasi...</option>
-                      <option value="portofolio">Perancangan Portfolio &amp; Personal Branding</option>
-                      <option value="formulir">Modernisasi Formulir &amp; Interaktivitas Web</option>
-                      <option value="audit">Audit Aksesibilitas WCAG &amp; Responsivitas Grid</option>
-                      <option value="pendampingan">Pendampingan Tugas Praktikum Front-End</option>
+                      <option value="Perancangan Portfolio &amp; Personal Branding">Perancangan Portfolio &amp; Personal Branding</option>
+                      <option value="Modernisasi Formulir &amp; Interaktivitas Web">Modernisasi Formulir &amp; Interaktivitas Web</option>
+                      <option value="Audit Aksesibilitas WCAG &amp; Responsivitas Grid">Audit Aksesibilitas WCAG &amp; Responsivitas Grid</option>
+                      <option value="Pendampingan Tugas Praktikum Front-End">Pendampingan Tugas Praktikum Front-End</option>
                     </select>
                     <label for="floatingKategoriLayanan"><i class="bi bi-grid-fill me-1 text-cherry"></i> Kategori Layanan Konsultasi *</label>
                     <div class="invalid-feedback">Silakan pilih salah satu kategori layanan.</div>
@@ -492,7 +386,7 @@
 
                   <!-- Floating Date: Tenggat Harapan -->
                   <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="floatingTenggat" placeholder="Tenggat">
+                    <input type="date" class="form-control" id="floatingTenggat" name="tenggat" placeholder="Tenggat">
                     <label for="floatingTenggat"><i class="bi bi-calendar-event me-1 text-cherry"></i> Tenggat Waktu yang Diharapkan</label>
                   </div>
 
@@ -521,49 +415,18 @@
                     </div>
                   </div>
 
-                  <!-- Checkboxes: Kebutuhan Tambahan -->
-                  <div class="mb-3">
-                    <span class="form-label d-block fw-bold mb-2">Kebutuhan Ekstra (Opsional)</span>
-                    <div class="row g-2">
-                      <div class="col-12">
-                        <div class="form-check custom-check-item">
-                          <input class="form-check-input" type="checkbox" id="checkDeploy" value="deploy">
-                          <label class="form-check-label" for="checkDeploy">
-                            Bantuan deployment langsung ke GitHub Pages &amp; konfigurasi domain
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <div class="form-check custom-check-item">
-                          <input class="form-check-input" type="checkbox" id="checkKonten" value="konten">
-                          <label class="form-check-label" for="checkKonten">
-                            Penyusunan naskah konten teks antarmuka (copywriting) ramah pengguna
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <div class="form-check custom-check-item">
-                          <input class="form-check-input" type="checkbox" id="checkRevisi" value="revisi">
-                          <label class="form-check-label" for="checkRevisi">
-                            Satu sesi peninjauan visual lanjutan &amp; evaluasi heuristik
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
                   <!-- Floating Textarea: Pesan / Deskripsi Kebutuhan -->
                   <div class="form-floating mb-3">
-                    <textarea class="form-control" placeholder="Ceritakan detail kebutuhan proyek Anda" id="floatingPesan" style="height: 130px" required></textarea>
+                    <textarea class="form-control" placeholder="Ceritakan detail kebutuhan proyek Anda" id="floatingPesan" name="deskripsiKebutuhan" style="height: 130px" required></textarea>
                     <label for="floatingPesan"><i class="bi bi-chat-heart me-1 text-cherry"></i> Deskripsi Kebutuhan &amp; Masalah Nyata *</label>
                     <div class="invalid-feedback">Deskripsi kebutuhan wajib diisi agar konsultasi dapat terarah.</div>
                     <div class="valid-feedback">Deskripsi kebutuhan terisi jelas!</div>
                   </div>
                 </fieldset>
 
-                <!-- Checkbox Syarat & Ketentuan (Wajib Ada Sesuai Rubrik) -->
+                <!-- Checkbox Syarat & Ketentuan -->
                 <div class="form-check mb-4 custom-terms-box p-3 rounded-3">
-                  <input class="form-check-input ms-0 me-2" type="checkbox" value="setuju" id="syaratKetentuan" required>
+                  <input class="form-check-input ms-0 me-2" type="checkbox" value="setuju" id="syaratKetentuan" name="persetujuan" required>
                   <label class="form-check-label fw-semibold" for="syaratKetentuan">
                     Saya menyetujui seluruh ketentuan layanan konsultasi &amp; etika akademik IT Del yang berlaku. <span class="wajib">*</span>
                   </label>
@@ -640,40 +503,20 @@
   </footer>
 
   <!-- =========================================================
-       BOOTSTRAP MODAL DIALOGS (4 MODAL DENGAN KONTEN BERBEDA)
+       UNIVERSAL DYNAMIC MODAL (1 MODAL TUNGGAL UNTUK SEMUA PROYEK)
        ========================================================= -->
-
-  <!-- Modal 1: AndaliTrack -->
-  <div class="modal fade" id="modalAndaliTrack" tabindex="-1" aria-labelledby="modalLabelAndaliTrack" aria-hidden="true">
+  <div class="modal fade" id="universalProjectModal" tabindex="-1" aria-labelledby="universalModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content custom-modal-content border-0 rounded-4 shadow">
         <div class="modal-header border-bottom-0 pb-0">
           <div class="d-flex align-items-center gap-2">
-            <span class="badge badge-custom fs-6">B2B AgriTech</span>
-            <h1 class="modal-title fs-5 fw-bold text-cherry" id="modalLabelAndaliTrack">AndaliTrack — Sistem Rantai Pasok Andaliman</h1>
+            <span class="badge badge-custom fs-6" id="universalModalCategory">Kategori</span>
+            <h1 class="modal-title fs-5 fw-bold text-cherry" id="universalModalTitle">Judul Proyek</h1>
           </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup modal"></button>
         </div>
-        <div class="modal-body py-4">
-          <img src="assets/proyek-andalitrack.jpg" alt="Preview AndaliTrack" class="img-fluid rounded-3 mb-3 w-100 modal-preview-img">
-          <h6 class="fw-bold text-cherry"><i class="bi bi-info-circle-fill me-1"></i> Deskripsi Proyek</h6>
-          <p class="text-muted small">
-            AndaliTrack adalah platform web B2B yang dirancang khusus untuk memotong rantai perantara dalam distribusi rempah khas Toba, Andaliman. Platform ini memfasilitasi pencatatan panen langsung dari petani hingga masuk ke proses penawaran pembeli skala industri (hotel, restoran, dan produsen bumbu kemasan).
-          </p>
-          <div class="row g-2 mt-2">
-            <div class="col-sm-6">
-              <div class="p-3 rounded-3 bg-light border">
-                <span class="d-block small text-muted">Peran Saya:</span>
-                <strong class="text-cherry small">UI/UX Designer &amp; Front-End Developer</strong>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="p-3 rounded-3 bg-light border">
-                <span class="d-block small text-muted">Teknologi:</span>
-                <strong class="text-cherry small">HTML5, CSS3 Grid, Bootstrap 5, Git</strong>
-              </div>
-            </div>
-          </div>
+        <div class="modal-body py-4" id="universalModalBody">
+          <!-- Konten diinjeksi secara dinamis via JavaScript sesuai proyek yang diklik -->
         </div>
         <div class="modal-footer border-top-0 pt-0">
           <button type="button" class="btn btn-garis btn-sm" data-bs-dismiss="modal">Tutup</button>
@@ -683,153 +526,26 @@
     </div>
   </div>
 
-  <!-- Modal 2: PartyUp! -->
-  <div class="modal fade" id="modalPartyUp" tabindex="-1" aria-labelledby="modalLabelPartyUp" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content custom-modal-content border-0 rounded-4 shadow">
-        <div class="modal-header border-bottom-0 pb-0">
-          <div class="d-flex align-items-center gap-2">
-            <span class="badge badge-custom fs-6">Community Hub</span>
-            <h1 class="modal-title fs-5 fw-bold text-cherry" id="modalLabelPartyUp">PartyUp! — Matchmaking Rekan Kolaborasi</h1>
-          </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup modal"></button>
-        </div>
-        <div class="modal-body py-4">
-          <img src="assets/proyek-partyup.jpg" alt="Preview PartyUp!" class="img-fluid rounded-3 mb-3 w-100 modal-preview-img">
-          <h6 class="fw-bold text-cherry"><i class="bi bi-info-circle-fill me-1"></i> Deskripsi Proyek</h6>
-          <p class="text-muted small">
-            PartyUp! menghadirkan pengalaman mencari tim lomba IT, hackathon, dan proyek capstone dengan konsep petualangan RPG guild board. Pengguna dapat memfilter calon anggota berdasarkan keahlian teknis (backend, frontend, UI designer, business analyst) serta reputasi kolaborasi sebelumnya.
-          </p>
-          <div class="row g-2 mt-2">
-            <div class="col-sm-6">
-              <div class="p-3 rounded-3 bg-light border">
-                <span class="d-block small text-muted">Peran Saya:</span>
-                <strong class="text-cherry small">Conceptor, Wireframing &amp; Styling Lead</strong>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="p-3 rounded-3 bg-light border">
-                <span class="d-block small text-muted">Teknologi:</span>
-                <strong class="text-cherry small">HTML5 Semantik, CSS Flexbox, Pixel Art Assets</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer border-top-0 pt-0">
-          <button type="button" class="btn btn-garis btn-sm" data-bs-dismiss="modal">Tutup</button>
-          <a href="#layanan" class="btn btn-utama btn-sm" data-bs-dismiss="modal">Diskusikan Proyek Serupa</a>
-        </div>
+  <!-- Toast Notification Feedback -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+    <div id="liveToastFeedback" class="toast custom-toast shadow" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <i class="bi bi-heart-fill text-cherry me-2"></i>
+        <strong class="me-auto text-cherry" id="toastFeedbackTitle">Notifikasi</strong>
+        <small class="text-muted">Baru saja</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body small text-muted" id="toastFeedbackMsg">
+        Pesan berhasil diproses.
       </div>
     </div>
   </div>
 
-  <!-- Modal 3: TitikMu -->
-  <div class="modal fade" id="modalTitikMu" tabindex="-1" aria-labelledby="modalLabelTitikMu" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content custom-modal-content border-0 rounded-4 shadow">
-        <div class="modal-header border-bottom-0 pb-0">
-          <div class="d-flex align-items-center gap-2">
-            <span class="badge badge-custom fs-6">HealthTech</span>
-            <h1 class="modal-title fs-5 fw-bold text-cherry" id="modalLabelTitikMu">TitikMu — Digitalisasi Transportasi Sumatra Utara</h1>
-          </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup modal"></button>
-        </div>
-        <div class="modal-body py-4">
-          <img src="assets/ProyekTitikMu.png" alt="Preview TitikMu" class="img-fluid rounded-3 mb-3 w-100 modal-preview-img">
-          <h6 class="fw-bold text-cherry"><i class="bi bi-info-circle-fill me-1"></i> Deskripsi Proyek</h6>
-          <p class="text-muted small">
-            TitikMu platform transportasi digital untuk wilayah Sumatra Utara, transportasi meliputi bus, kapal dan mobil travel. Aplikasi ini memudahkan pengguna untuk mencari rute perjalanan, jadwal keberangkatan, dan pemesanan tiket secara online.
-          </p>
-          <div class="row g-2 mt-2">
-            <div class="col-sm-6">
-              <div class="p-3 rounded-3 bg-light border">
-                <span class="d-block small text-muted">Peran Saya:</span>
-                <strong class="text-cherry small">Lead Interaction Designer &amp; Prototyper</strong>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="p-3 rounded-3 bg-light border">
-                <span class="d-block small text-muted">Teknologi:</span>
-                <strong class="text-cherry small">Figma, Bootstrap 5.3, WCAG Accessibility</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer border-top-0 pt-0">
-          <button type="button" class="btn btn-garis btn-sm" data-bs-dismiss="modal">Tutup</button>
-          <a href="#layanan" class="btn btn-utama btn-sm" data-bs-dismiss="modal">Diskusikan Proyek Serupa</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal 4: AntonyMart -->
-  <div class="modal fade" id="modalAntonyMart" tabindex="-1" aria-labelledby="modalLabelAntonyMart" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content custom-modal-content border-0 rounded-4 shadow">
-        <div class="modal-header border-bottom-0 pb-0">
-          <div class="d-flex align-items-center gap-2">
-            <span class="badge badge-custom fs-6">E-Commerce</span>
-            <h1 class="modal-title fs-5 fw-bold text-cherry" id="modalLabelAntonyMart">AntonyMart — E-Commerce Platform</h1>
-          </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup modal"></button>
-        </div>
-        <div class="modal-body py-4">
-          <img src="assets/proyek-antonymart.jpg" alt="Preview AntonyMart" class="img-fluid rounded-3 mb-3 w-100 modal-preview-img">
-          <h6 class="fw-bold text-cherry"><i class="bi bi-info-circle-fill me-1"></i> Deskripsi Proyek</h6>
-          <p class="text-muted small">
-            AntonyMart adalah platform e-commerce yang dirancang untuk memudahkan pengguna dalam menemukan dan membeli produk-produk lokal. Platform ini menawarkan berbagai fitur seperti pencarian produk, ulasan pelanggan, dan sistem pembayaran yang aman.
-          </p>
-          <div class="row g-2 mt-2">
-            <div class="col-sm-6">
-              <div class="p-3 rounded-3 bg-light border">
-                <span class="d-block small text-muted">Peran Saya:</span>
-                <strong class="text-cherry small">Front-End Developer &amp; Data Modeler</strong>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="p-3 rounded-3 bg-light border">
-                <span class="d-block small text-muted">Teknologi:</span>
-                <strong class="text-cherry small">Bootstrap 5 Grid, Advanced CSS, JavaScript</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer border-top-0 pt-0">
-          <button type="button" class="btn btn-garis btn-sm" data-bs-dismiss="modal">Tutup</button>
-          <a href="#layanan" class="btn btn-utama btn-sm" data-bs-dismiss="modal">Diskusikan Proyek Serupa</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- =========================================================
-       BOOTSTRAP 5.3.3 JS BUNDLE VIA CDN
-       ========================================================= -->
+  <!-- Bootstrap 5.3.3 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-  <!-- Script Penanganan Validasi Formulir Interaktif Bootstrap -->
-  <script>
-    (() => {
-      'use strict';
-      const form = document.getElementById('formKonsultasi');
-      if (!form) return;
-
-      form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        } else {
-          event.preventDefault();
-          alert('Terima kasih! Permintaan konsultasi Anda telah berhasil dikirim. Saya akan membalas dalam waktu maksimal 2 hari kerja ♡');
-          form.reset();
-          form.classList.remove('was-validated');
-          return;
-        }
-        form.classList.add('was-validated');
-      }, false);
-    })();
-  </script>
+  <!-- Script Decoupled CSR Architecture Week 4 -->
+  <script src="./js/api-service.js"></script>
+  <script src="./js/app.js"></script>
 </body>
 </html>
-

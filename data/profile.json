@@ -1,0 +1,17 @@
+{
+  "name": "Davina Olivia Yosefanny Hutabarat",
+  "nim": "12S24047",
+  "prodi": "S1 Sistem Informasi",
+  "angkatan": "2024",
+  "fakultas": "Fakultas Informatika dan Teknik Elektro",
+  "kampus": "Institut Teknologi Del",
+  "lokasi": "Laguboti, Toba — Sumatera Utara",
+  "avatar": "assets/Foto-Profil.png",
+  "bio": "Saya Davina, mahasiswa S1 Sistem Informasi Institut Teknologi Del. Menggabungkan analisis proses bisnis dengan estetika desain modern, aksesibilitas inklusif, dan arsitektur web yang responsif.",
+  "metrics": [
+    { "label": "Proyek Diselesaikan", "value": "5+ Proyek", "icon": "bi-code-square", "accent": "cherry" },
+    { "label": "Indeks Prestasi", "value": "3.62 / 4.00", "icon": "bi-mortarboard-fill", "accent": "rose" },
+    { "label": "Kompetisi & Riset", "value": "4 Capaian", "icon": "bi-trophy-fill", "accent": "pink" },
+    { "label": "Standar Aksesibilitas", "value": "WCAG 2.2 AA", "icon": "bi-patch-check-fill", "accent": "soft" }
+  ]
+}
