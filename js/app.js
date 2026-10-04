@@ -448,7 +448,7 @@ class PortfolioApp {
           // Tampilkan feedback visual Bootstrap Toast Sukses
           this.showToast(
             'Permintaan Terkirim! ♡',
-            `Halo ${this.escapeHTML(payload.nama)}, permintaan konsultasi Anda berhasil dikirim ke API dan dicatat di penyimpanan lokal.`
+            `Halo ${payload.nama}, permintaan konsultasi Anda berhasil dikirim ke API dan dicatat di penyimpanan lokal.`
           );
 
           // Reset formulir
