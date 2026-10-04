@@ -22,15 +22,6 @@ Pembaruan pada Praktikum Minggu 04 ini mentransformasikan arsitektur monolitik s
 | **Cabang Git (Branch)** | `week4-architecture` |
 | **Tautan Live Demo** | [https://davinahutabarat.github.io/-ppw-2026-week2-12S24047/](https://davinahutabarat.github.io/-ppw-2026-week2-12S24047/) |
 
-<!-- 
-==========================================================================
-CATATAN UNTUK PENGEMBANG (DAVINA HUTABARAT):
-Data proyek saat ini telah diisi dengan placeholder portofolio realistis 
-(AndaliTrack, PartyUp!, TitikMu, dan AntonyMart) lengkap dengan kategori, deskripsi,
-dan metrik kinerja. Jika Anda ingin mengubah judul, deskripsi, gambar, atau link repo
-GitHub Anda sendiri, silakan perbarui berkas: data/projects.json.
-========================================================================== 
--->
 
 ---
 
@@ -166,15 +157,72 @@ Berikut adalah rekaman visual analisis waterfall jaringan yang diperoleh dari De
 
 #### 1. Waterfall Jaringan - Cold Load (Cache Disabled)
 ![DevTools Network Waterfall - Cold Load](docs/waterfall-cold.png)
-*Gambar 1: Tangkapan layar hierarki waterfall pemuatan seluruh aset saat cold load tanpa pemanfaatan cache.*
+
 
 #### 2. Waterfall Jaringan - Warm Load (Repeated Visit / Cache Hit)
 ![DevTools Network Waterfall - Warm Load](docs/waterfall-warm.png)
-*Gambar 2: Tangkapan layar hierarki waterfall pemuatan aset berulang yang memanfaatkan status 304 Not Modified dan memory/disk cache.*
 
-> **Catatan Pengambilan Screenshot**:
-> Ambil tangkapan layar tab Network DevTools Anda saat melakukan Cold Load dan Warm Load, kemudian simpan kedua berkas gambar tersebut dengan nama `docs/waterfall-cold.png` dan `docs/waterfall-warm.png` di folder repositori ini.
+### 1. Ringkasan Cold Load vs Warm Load
 
+| Metrik | Cold Load | Warm Load | Perubahan |
+|---|---|---|---|
+| TTFB `index.html` (tab Timing) | 4.57 ms | 4.75 ms | Hampir sama |
+| First Contentful Paint (FCP) | 5736 ms | 676 ms | Turun ± 88% |
+| Jumlah request | 27 | 23 | -4 |
+| Data transferred | 4.9 MB | 2.2 kB | Turun ± 99,95% |
+| Resources | 5.2 MB | 2.7 MB | -2.5 MB |
+| DOMContentLoaded | 3.62 s | 76 ms | Turun ± 98% |
+| Load | 4.85 s | 78 ms | Turun ± 98% |
+| Finish | 4.86 s | 89 ms | Turun ± 98% |
+| Status `index.html` | 200 OK | 304 Not Modified | Divalidasi via ETag |
+
+### 2. Efisiensi Caching per Berkas (Ukuran Transfer)
+
+| Berkas | Cold (200) | Warm | Keterangan |
+|---|---|---|---|
+| `index.html` | 34.0 kB | 304, 243 B | Revalidasi ETag |
+| `css/custom-style.css` | 22.5 kB | 304, 243 B | Revalidasi ETag |
+| `js/app.js` | 20.4 kB | 304, 243 B | Revalidasi ETag |
+| `js/api-service.js` | 2.9 kB | 304, 242 B | Revalidasi ETag |
+| `data/projects.json` | 4.7 kB | 304, 243 B | Revalidasi ETag |
+| `data/services.json` | 2.2 kB | 304, 242 B | Revalidasi ETag |
+| `Foto-Profil.png` | 2.0 MB | 304, 245 B | Penghematan terbesar |
+| Bootstrap, Bootstrap Icons, Google Fonts (CDN) | 200 (diunduh) | 200, 0 B | Dilayani dari memory/disk cache browser |
+
+### 3. Header Caching `index.html` (Response Headers)
+
+| Header | Nilai | Arti |
+|---|---|---|
+| `Cache-Control` | `public, max-age=0` | Boleh disimpan, tetapi wajib divalidasi ke server setiap kali dipakai |
+| `ETag` | `W/"7dc1-1a106a3e632"` | Sidik jari berkas untuk validasi (`If-None-Match`) |
+| `Last-Modified` | `Sun, 04 Oct 2026 11:19:27 GMT` | Waktu modifikasi terakhir berkas |
+| Status Warm Load | `304 Not Modified` | Body kosong, hanya ± 243 B yang ditransfer |
+
+### 4. Bukti Screenshot
+
+| Cold Load | Warm Load |
+|---|---|
+| ![Waterfall Cold Load](docs/waterfall-cold.png) | ![Waterfall Warm Load](docs/waterfall-warm.png) |
+| ![Timing Cold Load](docs/timing-cold.png) | ![Timing Warm Load](docs/timing-warm.png) |
+| ![FCP Cold Load](docs/fcp-cold.png) | ![FCP Warm Load](docs/fcp-warm.png) |
+
+**Bukti status 304 dan header caching:**
+
+![Header 304](docs/headers-304.png)
+
+### 5. Analisis
+
+- **Cold Load** membutuhkan 4.85 s dan 4.9 MB. Sebagian besar ukuran berasal dari dua gambar PNG
+  berukuran 2.0 MB (`Foto-Profil.png`, `ProyekTitikMu.png`). Waktu tunggu terlama berasal dari
+  aset CDN eksternal (Google Fonts, Bootstrap), bukan dari berkas JSON.
+- **Warm Load** menurunkan data transfer menjadi 2.2 kB karena berkas lokal divalidasi dengan
+  ETag dan dijawab `304 Not Modified`, sedangkan aset CDN dilayani langsung dari cache browser.
+- **TTFB tidak membaik** karena `Cache-Control: max-age=0` mewajibkan browser bertanya ke server
+  setiap kali. Penghematan berasal dari tidak diunduhnya isi berkas, bukan dari waktu tunggu server.
+- **Data layer JSON sangat ringan** (`projects.json` 4.7 kB, `services.json` 2.2 kB, masing-masing
+  3-5 ms), sehingga pemisahan data dari HTML tidak menambah beban jaringan yang berarti.
+- **Rekomendasi:** kompres gambar ke WebP/JPG (target < 200 kB), serta atur `Cache-Control: max-age`
+  yang lebih panjang untuk aset statis pada hosting produksi.
 ---
 
 ## 🛡️ Keamanan Sisi Klien Lapis Pertama (Client-Side Defense in Depth)
@@ -231,7 +279,12 @@ ppw-2026-week2-12S24047/
 │   └── app.js              # Presentation Layer: Kontrol DOM, Dynamic CSR & Event Handlers
 ├── docs/
 │   ├── waterfall-cold.png  # Bukti tangkapan layar DevTools Network Waterfall (Cold Load)
-│   └── waterfall-warm.png  # Bukti tangkapan layar DevTools Network Waterfall (Warm Load)
+│   ├── waterfall-warm.png  # Bukti tangkapan layar DevTools Network Waterfall (Warm Load)
+│   ├── fcp-cold.png
+│   ├── fcp-warm.png  
+│   ├── headers-304.png
+│   ├── timing-warm.png
+│   └── TTFB index.html untuk Cold Load.png
 └── README.md               # Dokumentasi C4 Container Model, komparasi arsitektur & DevTools
 ```
 
@@ -264,20 +317,7 @@ python -m http.server 8000
 ```
 Buka browser pada alamat `http://localhost:8000`.
 
----
 
-## 📋 Checklist Pemenuhan Rubrik Penilaian Praktikum Analitik
-
-Berikut adalah matriks kesesuaian implementasi terhadap 6 kriteria evaluasi analitik modul:
-
-| No | Kriteria Evaluasi | Bobot | Standar Capaian Sangat Baik (85 - 100) | Status Pemenuhan Proyek |
-| :---: | :--- | :---: | :--- | :---: |
-| **1** | **Pemodelan Arsitektur C4 & SoC** | 20% | Diagram C4 Container sangat jelas memetakan Client, Static Server, CDN, JSON Providers, dan REST API; narasi ilmiah SoC dan komparasi arsitektur sangat mendalam. |  **Terpenuhi Sempurna** (Diagram Mermaid C4 Container lengkap + narasi ilmiah SoC 3-tier + tabel komparasi SSR vs CSR vs Jamstack). |
-| **2** | **Dekomposisi Data Layer JSON** | 20% | Seluruh data dipindahkan ke direktori `/data`: `projects.json` (minimal 4 proyek lengkap dengan metrics, tags, image, link), `services.json` (minimal 3 paket layanan), dan `profile.json`. |  **Terpenuhi Sempurna** (Format JSON 100% valid, memuat 4 proyek lengkap dengan metrik dan link repo, 4 paket layanan berfitur, serta profil diri). |
-| **3** | **Dynamic CSR & UI States** | 25% | HTML bersih dari hardcoded cards; data dimuat via `api-service.js` & `app.js` berbasis async/await; 4 UI states (loading, success, empty, error) terkelola sempurna disertai filter kategori instan. |  **Terpenuhi Sempurna** (Shell index.html murni, skeleton loading shimmer, alert error dengan tombol "Coba Lagi", empty state filter, dan filter instan). |
-| **4** | **Universal Dynamic Modal** | 15% | Tepat 1 elemen modal universal di HTML; injeksi data dinamis berbasis ID berjalan presisi; terhubung sempurna dengan Bootstrap 5 API; aman dari serangan DOM XSS. |  **Terpenuhi Sempurna** (Tepat 1 elemen `#universalProjectModal`, integrasi Bootstrap 5 Modal API, sanitasi `escapeHTML()` & `textContent`). |
-| **5** | **Decoupled Form & Local State** | 20% | Form submit asinkron murni (no reload); payload JSON terstruktur dikirim via HTTP POST; feedback visual Toast dinamis; persistensi ke localStorage reaktif. |  **Terpenuhi Sempurna** (Fetch POST ke JSONPlaceholder mock, status spinner pada tombol submit, Bootstrap Toast feedback, dan order badge reaktif). |
-| **6** | **Profiling DevTools & Git** | 20% | Tabel pengukuran DevTools (TTFB, Caching 304, Cold/Warm Load) lengkap disertai screenshot valid; Git commit deskriptif; live demo GitHub Pages berfungsi tanpa error. |  **Terpenuhi Sempurna** (Tabel RFC 9111 berstruktur komprehensif, placeholder screenshot waterfall di `docs/`, commit rapi, dan panduan Pages). |
 
 ---
 
