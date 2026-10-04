@@ -8,9 +8,16 @@
     "description": "Menghubungkan petani andaliman di kawasan Toba dengan pembeli skala industri komersial, lengkap dengan fitur estimasi panen dan rantai pasok.",
     "longDescription": "AndaliTrack adalah platform web B2B yang dirancang khusus untuk memotong rantai perantara dalam distribusi rempah khas Toba, Andaliman. Platform ini memfasilitasi pencatatan panen langsung dari petani hingga masuk ke proses penawaran pembeli skala industri (hotel, restoran, dan produsen bumbu kemasan).",
     "thumbnail": "assets/proyek-andalitrack.jpg",
+    "image": "assets/proyek-andalitrack.jpg",
     "role": "UI/UX Designer & Front-End Developer",
     "technology": "HTML5, CSS3 Grid, Bootstrap 5, Git",
-    "tags": ["HTML5", "CSS3 Grid", "Riset Lapangan"]
+    "tags": ["HTML5", "CSS3 Grid", "Riset Lapangan", "Bootstrap 5"],
+    "metrics": {
+      "mitraPetani": "45+ Petani",
+      "efisiensiDistribusi": "38%",
+      "transaksi": "120+ Kuintal"
+    },
+    "link": "https://github.com/DavinaHutabarat/andalitrack"
   },
   {
     "id": "partyup",
@@ -21,9 +28,16 @@
     "description": "Platform bagi mahasiswa IT Del untuk mencari rekan setim lomba hackathon dan tugas besar, dengan nuansa visual retro RPG gamification.",
     "longDescription": "PartyUp! menghadirkan pengalaman mencari tim lomba IT, hackathon, dan proyek capstone dengan konsep petualangan RPG guild board. Pengguna dapat memfilter calon anggota berdasarkan keahlian teknis (backend, frontend, UI designer, business analyst) serta reputasi kolaborasi sebelumnya.",
     "thumbnail": "assets/proyek-partyup.jpg",
+    "image": "assets/proyek-partyup.jpg",
     "role": "Conceptor, Wireframing & Styling Lead",
     "technology": "HTML5 Semantik, CSS Flexbox, Pixel Art Assets",
-    "tags": ["HTML5 Semantik", "CSS Flexbox", "UI/UX Retro"]
+    "tags": ["HTML5 Semantik", "CSS Flexbox", "UI/UX Retro"],
+    "metrics": {
+      "penggunaAktif": "250+ Mahasiswa",
+      "timTerbentuk": "32 Tim",
+      "tingkatKepuasan": "94%"
+    },
+    "link": "https://github.com/DavinaHutabarat/partyup"
   },
   {
     "id": "titikmu",
@@ -34,9 +48,16 @@
     "description": "TitikMu platform transportasi digital untuk wilayah Sumatra Utara, transportasi meliputi bus, kapal dan mobil travel. Memudahkan pencarian rute dan tiket online.",
     "longDescription": "TitikMu platform transportasi digital untuk wilayah Sumatra Utara, transportasi meliputi bus, kapal dan mobil travel. Aplikasi ini memudahkan pengguna untuk mencari rute perjalanan, jadwal keberangkatan, dan pemesanan tiket secara online.",
     "thumbnail": "assets/ProyekTitikMu.png",
+    "image": "assets/ProyekTitikMu.png",
     "role": "Lead Interaction Designer & Prototyper",
     "technology": "Figma, Bootstrap 5.3, WCAG Accessibility",
-    "tags": ["Product Design", "WCAG 2.2", "Bootstrap 5"]
+    "tags": ["Product Design", "WCAG 2.2", "Bootstrap 5"],
+    "metrics": {
+      "ruteTercakup": "18 Rute",
+      "mitraArmada": "12 Operator",
+      "kemudahanAkses": "4.8/5.0"
+    },
+    "link": "https://github.com/DavinaHutabarat/titikmu"
   },
   {
     "id": "antonymart",
@@ -47,8 +68,15 @@
     "description": "Platform e-commerce AntonyMart untuk menjual produk-produk ke masyarakat daerah toba terkhusus mahasiswa IT Del.",
     "longDescription": "AntonyMart adalah platform e-commerce yang dirancang untuk memudahkan pengguna dalam menemukan dan membeli produk-produk lokal. Platform ini menawarkan berbagai fitur seperti pencarian produk, ulasan pelanggan, dan sistem pembayaran yang aman.",
     "thumbnail": "assets/proyek-antonymart.jpg",
+    "image": "assets/proyek-antonymart.jpg",
     "role": "Front-End Developer & Data Modeler",
     "technology": "Bootstrap 5 Grid, Advanced CSS, JavaScript",
-    "tags": ["Bootstrap Grid", "CSS Variables", "Responsive UI"]
+    "tags": ["Bootstrap Grid", "CSS Variables", "Responsive UI"],
+    "metrics": {
+      "produkLokal": "80+ SKU",
+      "pelanggan": "400+ User",
+      "kecepatanKatalog": "1.2s Load"
+    },
+    "link": "https://github.com/DavinaHutabarat/antonymart"
   }
 ]

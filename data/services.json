@@ -2,21 +2,49 @@
   {
     "id": "portofolio",
     "name": "Perancangan Portfolio & Personal Branding",
+    "price": "Gratis (Kolaborasi Mahasiswa)",
+    "features": [
+      "Desain Web Portofolio Responsif",
+      "Tata Letak Semantik HTML5 & CSS Grid",
+      "Theming Personal Anggun & Menarik",
+      "Panduan Optimasi Profil LinkedIn & GitHub"
+    ],
     "description": "Penyusunan desain web portofolio responsif, tata letak grid semantik, dan styling bertema manis & elegan."
   },
   {
     "id": "formulir",
     "name": "Modernisasi Formulir & Interaktivitas Web",
+    "price": "Gratis (Kolaborasi Mahasiswa)",
+    "features": [
+      "Komponen Floating Labels & Input Groups",
+      "Validasi Visual Interaktif Dua Arah",
+      "Pengiriman Asinkron REST API (JSON DTO)",
+      "Notifikasi Real-time dengan Bootstrap Toast"
+    ],
     "description": "Implementasi form modern dengan floating labels, validasi visual dua arah, dan pengiriman asinkron DTO."
   },
   {
     "id": "audit",
     "name": "Audit Aksesibilitas WCAG & Responsivitas Grid",
+    "price": "Gratis (Kolaborasi Mahasiswa)",
+    "features": [
+      "Audit Kepatuhan Rasio Kontras WCAG 2.2 AA",
+      "Uji Navigasi Keyboard & ARIA Landmark",
+      "Optimasi Responsivitas Fluid Multi-Device",
+      "Laporan Temuan & Solusi Perbaikan Kode"
+    ],
     "description": "Pengujian kepatuhan kontras warna, keyboard navigation, dan responsivitas fluid di semua breakpoint."
   },
   {
     "id": "pendampingan",
     "name": "Pendampingan Tugas Praktikum Front-End",
+    "price": "Gratis (Kolaborasi Mahasiswa)",
+    "features": [
+      "Diskusi Konsep Decoupled & Client-Side Rendering",
+      "Debugging CSS Specificity & Flexbox/Grid",
+      "Best Practices Git Branching & GitHub Pages",
+      "Review Kualitas Kode Berstandar W3C"
+    ],
     "description": "Sesi diskusi dan asistensi pengerjaan tugas modul praktikum web, debugging CSS/JS, dan standar industri."
   }
 ]
