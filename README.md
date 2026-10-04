@@ -129,27 +129,6 @@ Sesuai standar **RFC 9111 (HTTP Caching)**, peramban modern menerapkan hierarki 
 
 Ketika aset yang diminta masih berada dalam masa validitas, peramban mengambilnya langsung dari memori atau disk (`(disk cache)` / `(memory cache)`) tanpa mengirim request keluar. Ketika masa validitas kedaluwarsa, browser mengirimkan header `If-None-Match: "<ETag>"`. Jika berkas di server belum berubah, server merespons dengan status **HTTP 304 Not Modified** tanpa menyertakan body konten, menghemat hingga 95% pemakaian bandwidth.
 
-### Tabel Pengukuran DevTools: Cold Load vs Warm Load
-
-> **Petunjuk Mahasiswa (Davina Hutabarat)**:
-> 1. Buka halaman GitHub Pages web Anda di Google Chrome.
-> 2. Buka DevTools (`F12` atau `Ctrl + Shift + I`), lalu pilih tab **Network**.
-> 3. **Pengukuran Cold Load**: Centang opsi *"Disable cache"*, lakukan reload penuh (`Ctrl + F5` atau `Ctrl + Shift + R`), dan catat metrik pada baris Cold Load.
-> 4. **Pengukuran Warm Load**: Hapus centang *"Disable cache"*, tekan tombol reload biasa (`F5`), dan catat metrik pada baris Warm Load.
-> 5. Masukkan angka hasil pengukuran aktual Anda ke dalam tabel di bawah ini untuk menggantikan teks placeholder.
-
-| Metrik Evaluasi Kinerja | Cold Load (Disable Cache / Bersih) | Warm Load (Cache Aktif / Muat Ulang) | Analisis Efisiensi & Standar RFC 9111 |
-| :--- | :--- | :--- | :--- |
-| **Time to First Byte (TTFB)** | <!-- [Isi hasil ukur Anda, mis: 42 ms] --> | <!-- [Isi hasil ukur Anda, mis: 8 ms / 0 ms] --> | Penurunan TTFB pada warm load menunjukkan eliminasi DNS lookup dan handshake TLS. |
-| **First Contentful Paint (FCP)** | <!-- [Isi hasil ukur Anda, mis: 0.6 s] --> | <!-- [Isi hasil ukur Anda, mis: 0.2 s] --> | Konten awal dirender jauh lebih cepat karena berkas stylesheet CSS diambil dari cache lokal. |
-| **Total Permintaan Jaringan (Requests)** | <!-- [Isi hasil ukur Anda, mis: 14 requests] --> | <!-- [Isi hasil ukur Anda, mis: 14 requests] --> | Jumlah request identik, namun jalur transfer aset berpindah ke internal memory/disk. |
-| **Ukuran Data Ditransfer (Transferred)** | <!-- [Isi hasil ukur Anda, mis: 1.8 MB] --> | <!-- [Isi hasil ukur Anda, mis: 2.4 KB (disk cache)] --> | Penghematan bandwidth drastis karena aset berukuran besar tidak diunduh ulang. |
-| **Ukuran Total Sumber Daya (Resources)** | <!-- [Isi hasil ukur Anda, mis: 2.1 MB] --> | <!-- [Isi hasil ukur Anda, mis: 2.1 MB] --> | Total representasi data tetap utuh dan didekompresi di memori browser. |
-| **Waktu Selesai (DOMContentLoaded)** | <!-- [Isi hasil ukur Anda, mis: 480 ms] --> | <!-- [Isi hasil ukur Anda, mis: 120 ms] --> | Parsing struktur DOM selesai jauh lebih singkat karena parser tidak terblokir unduhan eksternal. |
-| **Waktu Pemuatan Penuh (Load Time)** | <!-- [Isi hasil ukur Anda, mis: 850 ms] --> | <!-- [Isi hasil ukur Anda, mis: 210 ms] --> | Pengalaman interaktivitas instan yang dirasakan langsung oleh pengguna akhir. |
-| **Status HTTP Dominan** | `200 OK` (Transferred over network) | `304 Not Modified` / `200 OK (from disk cache)` | Membuktikan efektivitas header validasi `ETag` dan `If-None-Match`. |
-
----
 
 ### Tangkapan Layar Waterfall DevTools Network Tab
 
